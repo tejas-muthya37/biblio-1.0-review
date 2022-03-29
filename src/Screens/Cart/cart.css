@@ -1,0 +1,121 @@
+.cart-title {
+    margin: 20vh auto 0 auto;
+    text-align: center;
+    letter-spacing: 5px;
+    word-spacing: 10px;
+    font-size: 1.75rem;
+    width: max-content;
+}
+
+.landing-page-container.cart {
+    margin-top: 11vh;
+    display: flex;
+    padding: 0 10rem;
+}
+
+.landing-page-content.cart {
+    width: 50%;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.order-details {
+    width: 25rem;
+    height: max-content;
+    background-color: var(--body-bg);
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    border-radius: 5px;
+    margin: 0 0 0 auto;
+}
+
+.order-details h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.pricing-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid whitesmoke;
+}
+
+.pricing-details>div,
+.total-price {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-price p {
+    font-weight: bold;
+}
+
+.btn-checkout {
+    border: none;
+    background-color: var(--heading-color);
+    color: whitesmoke;
+    height: 2.5rem;
+    width: 100%;
+    border-radius: 2px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 1300px) {
+    .landing-page-container.cart {
+        padding: 0 5rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .landing-page-content.cart {
+        width: 100%;
+        padding: 5rem;
+        margin-top: 5rem;
+        border-right: none;
+        border-top: 1px solid var(--tertiary-color);
+    }
+
+    .landing-page-container.cart {
+        flex-direction: column-reverse;
+        padding: 0;
+    }
+
+    .order-details {
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 548px) {
+    .cart-title {
+        font-size: 1.5rem;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .order-details {
+        width: 250px;
+    }
+
+    .landing-page-content.cart {
+        padding: 5rem 0 0 0;
+    }
+
+    .cart-title {
+        letter-spacing: 2px;
+        word-spacing: 4px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .cart-title {
+        font-size: 1.3rem;
+    }
+}
