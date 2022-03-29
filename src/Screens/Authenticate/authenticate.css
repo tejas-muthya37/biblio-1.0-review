@@ -1,0 +1,96 @@
+* {
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.landing-card {
+    margin: 11rem auto 0 auto;
+    width: 23rem;
+    background-color: var(--body-bg);
+    padding: 1.5rem;
+    border-radius: 5px;
+}
+
+.landing-card a {
+    color: whitesmoke;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.landing-card>* {
+    margin: auto;
+}
+
+.landing-card h1 {
+    color: whitesmoke;
+    text-align: center;
+    font-size: 1.75rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.landing-inputs {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0 0.75rem 0;
+}
+
+.landing-inputs .label-with-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    gap: 0.25rem;
+}
+
+.landing-inputs label {
+    margin-bottom: 5px;
+    color: whitesmoke;
+}
+
+.landing-inputs .label-with-input input {
+    height: 2rem;
+    border-radius: 1px;
+    padding: 0 0.5rem;
+    outline: none;
+    border: none;
+}
+
+.secondary-cta-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.secondary-cta-section label {
+    margin-left: 8px;
+    color: whitesmoke;
+}
+
+.secondary-cta-section a {
+    font-size: 0.9rem;
+}
+
+.secondary-cta-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.landing-card button {
+    background-color: var(--heading-color);
+    border: none;
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    color: whitesmoke;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+
+.alternate-cta {
+    text-align: center;
+    font-size: 1rem;
+}
