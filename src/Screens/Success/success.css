@@ -1,0 +1,54 @@
+.Success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+    margin-top: 7.5rem;
+}
+
+.Success span {
+    font-size: 7.5rem;
+    height: 12.5rem;
+    width: 12.5rem;
+    text-align: center;
+    color: green;
+    border: 10px solid green;
+    border-radius: 100%;
+}
+
+.btn-continue-shopping {
+    margin: auto;
+    height: 3rem;
+    font-size: 1.1rem;
+    border: none;
+    color: whitesmoke;
+    background-color: var(--body-bg);
+    border-radius: 2px;
+    cursor: pointer;
+    width: 15rem;
+}
+
+@media screen and (max-width: 500px) {
+    .Success h1 {
+        font-size: 1.5rem;
+    }
+
+    .Success span {
+        font-size: 5rem;
+        height: 8.5rem;
+        width: 8.5rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .Success h1 {
+        font-size: 1.25rem;
+    }
+
+    .Success span {
+        font-size: 3.5rem;
+        height: 6rem;
+        width: 6rem;
+        border: 7px solid green;
+    }
+}
