@@ -5,6 +5,7 @@ const FilterContext = createContext();
 const reducer = (state, action) => {
   switch (action.type) {
     case "Setup":
+      console.log(action.payload);
       return {
         ...state,
         items: action.payload,
@@ -17,12 +18,12 @@ const reducer = (state, action) => {
     case "Low to High":
       return {
         ...state,
-        items: state.items.sort((a, b) => a.bookPrice - b.bookPrice),
+        items: [...state.items].sort((a, b) => a.bookPrice - b.bookPrice),
       };
     case "High to Low":
       return {
         ...state,
-        items: state.items.sort((a, b) => b.bookPrice - a.bookPrice),
+        items: [...state.items].sort((a, b) => b.bookPrice - a.bookPrice),
       };
     case "Price filter":
       state.items.map((item) => {
@@ -56,6 +57,7 @@ const reducer = (state, action) => {
           return true;
         });
         return {
+          ...state,
           items: state.items,
           categoryFiltersFlag: true,
           checkedCount: state.checkedCount + 1,
@@ -69,6 +71,7 @@ const reducer = (state, action) => {
             return true;
           });
           return {
+            ...state,
             items: state.items,
             categoryFiltersFlag: true,
             checkedCount: state.checkedCount + 1,
@@ -77,6 +80,7 @@ const reducer = (state, action) => {
           if (state.checkedCount === 1) {
             state.items.map((item) => (item.show = true));
             return {
+              ...state,
               items: state.items,
               categoryFiltersFlag: false,
               checkedCount: state.checkedCount - 1,
@@ -87,6 +91,7 @@ const reducer = (state, action) => {
               return true;
             });
             return {
+              ...state,
               items: state.items,
               categoryFiltersFlag: true,
               checkedCount: state.checkedCount - 1,
@@ -97,7 +102,8 @@ const reducer = (state, action) => {
     case "Clear filter":
       state.items.map((item) => (item.show = true));
       return {
-        items: state.items,
+        ...state,
+        items: action.payload,
         categoryFiltersFlag: false,
         checkedCount: 0,
       };

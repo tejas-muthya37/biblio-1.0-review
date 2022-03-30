@@ -1,3 +1,37 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap');
+
+
+:root {
+  --body-bg: #012652;
+  --heading-color: #0D94FB;
+  --secondary-color: #888888;
+  --tertiary-color: #BEBEBE;
+  --near-black: #282828;
+  --number-font: 'Nunito', sans-serif;
+  --body-font: 'Rubik', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: whitesmoke;
+}
+
+.App,
+.App button {
+  font-family: var(--body-font);
+}
+
+.message-toast {
+  margin-top: 9vh;
   text-align: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0.75rem 1rem;
 }

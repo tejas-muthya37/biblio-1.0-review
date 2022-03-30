@@ -28,7 +28,7 @@ function Categories() {
         <div className="landing-page-content categories">
           {state.categories.map((category) => {
             return (
-              <Link to={"/books/" + category.categoryName}>
+              <Link key={category._id} to={"/books/" + category.categoryName}>
                 <div className="category-card">
                   <img src={category.thumbnail} alt="" />
                   <p>{category.categoryName}</p>

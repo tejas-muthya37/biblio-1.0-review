@@ -30,8 +30,7 @@ function Products(props) {
   const inputRef = useRef(null);
 
   const clearFilters = () => {
-    dispatch({ type: "Clear filter" });
-    dispatch({ type: "Setup", payload: unsortedArray });
+    dispatch({ type: "Clear filter", payload: unsortedArray });
     setPrice("450");
     setFormInputs({
       thrillerCheckbox: false,
@@ -55,7 +54,7 @@ function Products(props) {
         dispatch({ type: "Setup", payload: json.products });
         setUnsortedArray(json.products);
       });
-  }, [dispatch]);
+  }, []);
 
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
 
