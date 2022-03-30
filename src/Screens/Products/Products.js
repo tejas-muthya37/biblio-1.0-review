@@ -1,6 +1,6 @@
 import "./products.css";
 import Card from "./../../Components/Card/Card";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useProducts } from "./../../Context/products-context";
 import { useToast } from "./../../Context/toast-context";
 import { useFilter } from "./../../Context/filter-context";
@@ -9,20 +9,40 @@ import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
 function Products(props) {
+  const [price, setPrice] = useState("450");
+
+  const [formInputs, setFormInputs] = useState({
+    thrillerCheckbox: false,
+    romanceCheckbox: false,
+    scifiCheckbox: false,
+    dramaCheckbox: false,
+    rating4Checkbox: false,
+    rating3Checkbox: false,
+    rating2Checkbox: false,
+    lowToHighRadio: false,
+    highToLowRadio: false,
+  });
+
+  const [unsortedArray, setUnsortedArray] = useState([]);
+
   let navigate = useNavigate();
   let { categoryName } = useParams();
   const inputRef = useRef(null);
 
-  const inputs = document.querySelectorAll('input:not([type="text"])');
-
   const clearFilters = () => {
     dispatch({ type: "Clear filter" });
-    inputs.forEach((input) => {
-      if (input.type === "range") {
-        input.value = "150";
-      } else {
-        input.checked = false;
-      }
+    dispatch({ type: "Setup", payload: unsortedArray });
+    setPrice("450");
+    setFormInputs({
+      thrillerCheckbox: false,
+      romanceCheckbox: false,
+      scifiCheckbox: false,
+      dramaCheckbox: false,
+      rating4Checkbox: false,
+      rating3Checkbox: false,
+      rating2Checkbox: false,
+      lowToHighRadio: false,
+      highToLowRadio: false,
     });
   };
 
@@ -31,7 +51,10 @@ function Products(props) {
   useEffect(() => {
     fetch("/api/products", { method: "GET" })
       .then((res) => res.json())
-      .then((json) => dispatch({ type: "Setup", payload: json.products }));
+      .then((json) => {
+        dispatch({ type: "Setup", payload: json.products });
+        setUnsortedArray(json.products);
+      });
   }, [dispatch]);
 
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
@@ -155,9 +178,11 @@ function Products(props) {
             <h3 className="filter-header"> Price </h3>{" "}
             <input
               ref={inputRef}
-              onChange={(event) =>
-                dispatch({ type: "Price filter", payload: event.target.value })
-              }
+              onChange={(event) => {
+                setPrice(event.target.value);
+                dispatch({ type: "Price filter", payload: event.target.value });
+              }}
+              value={price}
               type="range"
               min="150"
               max="450"
@@ -177,9 +202,17 @@ function Products(props) {
                   id="Thriller"
                   className="category-checkbox"
                   type="checkbox"
-                  onChange={(event) =>
-                    dispatch({ type: "Category filter", payload: event.target })
-                  }
+                  onChange={(event) => {
+                    setFormInputs({
+                      ...formInputs,
+                      thrillerCheckbox: !formInputs.thrillerCheckbox,
+                    });
+                    dispatch({
+                      type: "Category filter",
+                      payload: event.target,
+                    });
+                  }}
+                  checked={formInputs.thrillerCheckbox}
                 />
                 <label htmlFor="Thriller"> Thrillers </label>{" "}
               </div>{" "}
@@ -189,9 +222,17 @@ function Products(props) {
                   id="Drama"
                   className="category-checkbox"
                   type="checkbox"
-                  onChange={(event) =>
-                    dispatch({ type: "Category filter", payload: event.target })
-                  }
+                  onChange={(event) => {
+                    setFormInputs({
+                      ...formInputs,
+                      dramaCheckbox: !formInputs.dramaCheckbox,
+                    });
+                    dispatch({
+                      type: "Category filter",
+                      payload: event.target,
+                    });
+                  }}
+                  checked={formInputs.dramaCheckbox}
                 />{" "}
                 <label htmlFor="Drama"> Drama </label>{" "}
               </div>{" "}
@@ -201,9 +242,17 @@ function Products(props) {
                   id="Scifi"
                   className="category-checkbox"
                   type="checkbox"
-                  onChange={(event) =>
-                    dispatch({ type: "Category filter", payload: event.target })
-                  }
+                  onChange={(event) => {
+                    setFormInputs({
+                      ...formInputs,
+                      scifiCheckbox: !formInputs.scifiCheckbox,
+                    });
+                    dispatch({
+                      type: "Category filter",
+                      payload: event.target,
+                    });
+                  }}
+                  checked={formInputs.scifiCheckbox}
                 />{" "}
                 <label htmlFor="Scifi"> Sci - Fi </label>{" "}
               </div>{" "}
@@ -213,9 +262,17 @@ function Products(props) {
                   id="Romance"
                   className="category-checkbox"
                   type="checkbox"
-                  onChange={(event) =>
-                    dispatch({ type: "Category filter", payload: event.target })
-                  }
+                  onChange={(event) => {
+                    setFormInputs({
+                      ...formInputs,
+                      romanceCheckbox: !formInputs.romanceCheckbox,
+                    });
+                    dispatch({
+                      type: "Category filter",
+                      payload: event.target,
+                    });
+                  }}
+                  checked={formInputs.romanceCheckbox}
                 />{" "}
                 <label htmlFor="Romance"> Romance </label>{" "}
               </div>{" "}
@@ -230,12 +287,19 @@ function Products(props) {
                 value={4}
                 id="rating-4-stars-and-above"
                 name="rating-input"
-                onClick={(event) =>
+                onClick={(event) => {
+                  setFormInputs({
+                    ...formInputs,
+                    rating4Checkbox: true,
+                    rating3Checkbox: false,
+                    rating2Checkbox: false,
+                  });
                   dispatch({
                     type: "Rating filter",
                     payload: event.target.value,
-                  })
-                }
+                  });
+                }}
+                checked={formInputs.rating4Checkbox}
               />{" "}
               <label htmlFor="rating-4-stars-and-above">
                 {" "}
@@ -249,12 +313,19 @@ function Products(props) {
                 value={3}
                 id="rating-3-stars-and-above"
                 name="rating-input"
-                onClick={(event) =>
+                onClick={(event) => {
+                  setFormInputs({
+                    ...formInputs,
+                    rating4Checkbox: false,
+                    rating3Checkbox: true,
+                    rating2Checkbox: false,
+                  });
                   dispatch({
                     type: "Rating filter",
                     payload: event.target.value,
-                  })
-                }
+                  });
+                }}
+                checked={formInputs.rating3Checkbox}
               />{" "}
               <label htmlFor="rating-3-stars-and-above">
                 {" "}
@@ -268,12 +339,19 @@ function Products(props) {
                 value={2}
                 id="rating-2-stars-and-above"
                 name="rating-input"
-                onClick={(event) =>
+                onClick={(event) => {
+                  setFormInputs({
+                    ...formInputs,
+                    rating4Checkbox: false,
+                    rating3Checkbox: false,
+                    rating2Checkbox: true,
+                  });
                   dispatch({
                     type: "Rating filter",
                     payload: event.target.value,
-                  })
-                }
+                  });
+                }}
+                checked={formInputs.rating2Checkbox}
               />{" "}
               <label htmlFor="rating-2-stars-and-above">
                 {" "}
@@ -289,7 +367,15 @@ function Products(props) {
                 type="radio"
                 id="radio-5"
                 name="sort-input"
-                onClick={() => dispatch({ type: "Low to High" })}
+                onClick={() => {
+                  setFormInputs({
+                    ...formInputs,
+                    lowToHighRadio: true,
+                    highToLowRadio: false,
+                  });
+                  dispatch({ type: "Low to High" });
+                }}
+                checked={formInputs.lowToHighRadio}
               />
               <label htmlFor="radio-5"> Low to High </label>{" "}
             </div>{" "}
@@ -299,7 +385,15 @@ function Products(props) {
                 type="radio"
                 id="radio-6"
                 name="sort-input"
-                onClick={() => dispatch({ type: "High to Low" })}
+                onClick={() => {
+                  setFormInputs({
+                    ...formInputs,
+                    lowToHighRadio: false,
+                    highToLowRadio: true,
+                  });
+                  dispatch({ type: "High to Low" });
+                }}
+                checked={formInputs.highToLowRadio}
               />
               <label htmlFor="radio-6"> High to Low </label>{" "}
             </div>{" "}
