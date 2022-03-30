@@ -1,0 +1,106 @@
+.AddressForm {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    width: 32.5rem;
+    margin: 10rem auto;
+}
+
+.address-form-inputs form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.address-form-inputs form input,
+.address-form-inputs form textarea {
+    height: 2.5rem;
+    width: 15rem;
+    padding: 0.75rem;
+    outline: none;
+    border: 1px solid var(--tertiary-color);
+    border-radius: 3px;
+    font-family: var(--body-font);
+    resize: none;
+}
+
+.address-form-inputs form div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.address-form-inputs .address-mid-2 textarea {
+    width: 32.5rem;
+    height: 4rem;
+}
+
+.AddressForm .address-button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.AddressForm .address-button-group button {
+    height: 2.5rem;
+    border: none;
+    color: whitesmoke;
+    background-color: var(--body-bg);
+    font-size: 1rem;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 7.5rem;
+}
+
+@media screen and (max-width: 700px) {
+    .AddressForm {
+        width: 25rem;
+    }
+
+    .address-form-inputs form input,
+    .address-form-inputs form textarea {
+        width: 11.5rem;
+    }
+
+    .address-form-inputs .address-mid-2 textarea {
+        width: 25rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .AddressForm {
+        width: 20rem;
+
+    }
+
+    .address-form-inputs form input,
+    .address-form-inputs form textarea {
+        width: 9rem;
+    }
+
+    .address-form-inputs .address-mid-2 textarea {
+        width: 20rem;
+
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .AddressForm {
+        width: 15rem;
+
+    }
+
+    .address-form-inputs form input,
+    .address-form-inputs form textarea {
+        width: 6.5rem;
+    }
+
+    .address-form-inputs .address-mid-2 textarea {
+        width: 15rem;
+
+    }
+
+    .AddressForm .address-button-group button {
+        width: 5rem;
+    }
+}
