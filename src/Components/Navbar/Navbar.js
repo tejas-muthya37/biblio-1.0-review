@@ -4,9 +4,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link } from "react-router-dom";
 import { useProducts } from "./../../Context/products-context";
 import { useNavbar } from "./../../Context/navbar-context";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Navbar() {
+  const [burgerClicked, setBurgerClicked] = useState(false);
+
   const encodedToken = localStorage.getItem("ENCODED_TOKEN");
 
   const { isAuthenticated, setIsAuthenticated } = useNavbar();
@@ -24,15 +26,7 @@ function Navbar() {
   const { navbarButtonText, setNavbarButtonText } = useNavbar();
 
   const handleNavbar = () => {
-    const items = document.querySelectorAll(".nav-items li");
-    const burger = document.querySelector(".burger");
-    const nav = document.querySelector(".nav-items");
-
-    nav.classList.toggle("navSlide");
-    items.forEach((item) => {
-      item.style.animation = "";
-    });
-    burger.classList.toggle("toggle");
+    setBurgerClicked(!burgerClicked);
   };
 
   const handleLogout = () => {
@@ -51,20 +45,7 @@ function Navbar() {
   };
 
   function handleClick() {
-    const burger = document.querySelector(".burger");
-    const nav = document.querySelector(".nav-items");
-    const items = document.querySelectorAll(".nav-items li");
-    nav.classList.toggle("navSlide");
-
-    items.forEach((item, index) => {
-      if (item.style.animation) {
-        item.style.animation = "";
-      } else {
-        item.style.animation = `navLinkFade 0.3s ease forwards ${index / 7}s`;
-      }
-    });
-
-    burger.classList.toggle("toggle");
+    setBurgerClicked(!burgerClicked);
   }
 
   return (
@@ -74,8 +55,14 @@ function Navbar() {
           <Link to="/">biblio</Link>
         </div>
 
-        <div className="nav-items">
-          <li>
+        <div className={burgerClicked ? "nav-items navSlide" : "nav-items"}>
+          <li
+            style={{
+              animation: burgerClicked
+                ? `navLinkFade 0.3s ease forwards ${2 / 7}s`
+                : "",
+            }}
+          >
             <div onClick={handleNavbar} className="nav-cart-mobile">
               <Link to={isAuthenticated === true ? "/cart" : "/login"}>
                 My Cart
@@ -93,7 +80,13 @@ function Navbar() {
               <span className="nav-count">{cartArray.length}</span>
             </div>
           </li>
-          <li>
+          <li
+            style={{
+              animation: burgerClicked
+                ? `navLinkFade 0.3s ease forwards ${2 / 7}s`
+                : "",
+            }}
+          >
             <div onClick={handleNavbar} className="nav-wishlist-mobile">
               <div>
                 <Link to={isAuthenticated === true ? "/wishlist" : "/login"}>
@@ -113,7 +106,14 @@ function Navbar() {
               <span className="nav-count">{wishlistArray.length}</span>
             </div>
           </li>
-          <li onClick={handleLogout}>
+          <li
+            style={{
+              animation: burgerClicked
+                ? `navLinkFade 0.3s ease forwards ${2 / 7}s`
+                : "",
+            }}
+            onClick={handleLogout}
+          >
             <Link to={navbarButtonText === "Login" ? "/login" : "/books"}>
               <button>{navbarButtonText}</button>
             </Link>
@@ -124,7 +124,11 @@ function Navbar() {
           </li> */}
         </div>
 
-        <div onClick={() => handleClick()} id="burger" className="burger">
+        <div
+          onClick={() => handleClick()}
+          id="burger"
+          className={burgerClicked ? "burger toggle" : "burger"}
+        >
           <div className="line1"></div>
           <div className="line2"></div>
           <div className="line3"></div>
