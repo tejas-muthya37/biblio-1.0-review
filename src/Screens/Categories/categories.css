@@ -1,0 +1,137 @@
+.landing-page-container.categories {
+    margin-top: 11vh;
+    max-width: 100%;
+    padding: 0;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.landing-page-container-title {
+    margin: 20vh auto 0 auto;
+    text-align: center;
+    letter-spacing: 5px;
+    word-spacing: 10px;
+    font-size: 1.75rem;
+    width: max-content;
+}
+
+
+.landing-page-container.categories button {
+    height: 3rem;
+    border: none;
+    color: whitesmoke;
+    font-size: 1rem;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 10rem;
+    background-color: var(--body-bg);
+    font-size: 1.25rem;
+    margin: 3rem auto;
+}
+
+.landing-page-content.categories {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.landing-page-content.categories img {
+    width: 12rem;
+    height: 12rem;
+    padding: 5px;
+    border: 4px solid var(--body-bg);
+    object-fit: cover;
+}
+
+.landing-page-content.categories>* {
+    text-decoration: none;
+    color: var(--near-black);
+    
+}
+
+.category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    cursor: pointer;
+    transition: transform 0.1s ease-out;
+}
+
+.category-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.landing-page-content.categories>*:nth-child(1) {
+    text-shadow: 2px 1px #FF0000;
+}
+
+.landing-page-content.categories>*:nth-child(2) {
+    text-shadow: 2px 1px #ff8c00;
+}
+
+.landing-page-content.categories>*:nth-child(3) {
+    text-shadow: 2px 1px skyblue;
+}
+
+.landing-page-content.categories>*:nth-child(4) {
+    text-shadow: 2px 1px #ff5f77;
+}
+
+
+@media screen and (max-width: 928px) {
+    .landing-page-content.categories img {
+        width: 12.5rem;
+        height: 12.5rem;
+    }
+
+    .landing-page-container.categories {
+        padding: 0 7.5rem;
+    }
+}
+
+
+@media screen and (max-width: 895px) {
+    .landing-page-content.categories {
+        flex-direction: column;
+        align-self: center;
+    }
+
+    .landing-page-container.categories {
+        padding: 0 5rem;
+    }
+}
+
+@media screen and (max-width: 688px) {
+    .landing-page-container.categories {
+        padding: 0 3rem;
+    }
+
+    .landing-page-content.categories img {
+        width: 10rem;
+        height: 10rem;
+    }
+}
+
+@media screen and (max-width: 548px) {
+    .landing-page-container-title {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        text-align: center;
+        word-spacing: 4px;
+    }
+
+    .landing-page-container.categories {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .landing-page-container-title {
+        font-size: 1.3rem;
+    }
+}
