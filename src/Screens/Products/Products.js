@@ -59,7 +59,8 @@ function Products(props) {
       .then((json) => {
         dispatch({ type: "Setup", payload: json.products });
         setUnsortedArray(json.products);
-      });
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
@@ -73,6 +74,7 @@ function Products(props) {
     var productFlag = false;
     cartArray.map((cartItem, index) => {
       if (cartItem._id === product._id) {
+        productFlag = true;
         fetch(`/api/user/cart/${product._id}`, {
           method: "POST",
           headers: {
@@ -84,9 +86,9 @@ function Products(props) {
         })
           .then((res) => res.json())
           .then((data) => {
+            console.log(data);
             if (!data.message) {
               toggleToast("Added To Cart ✔", "green", "whitesmoke");
-              productFlag = true;
               setCartArray([
                 ...cartArray.slice(0, index),
                 {
@@ -98,7 +100,8 @@ function Products(props) {
             } else {
               navigate("/login");
             }
-          });
+          })
+          .catch((err) => console.log(err));
       }
       return true;
     });
@@ -119,38 +122,43 @@ function Products(props) {
           } else {
             navigate("/login");
           }
-        });
+        })
+        .catch((err) => console.log(err));
     }
   };
 
   const addToWishlist = (product) => {
     var wishlistFlag = false;
-    fetch("/api/user/wishlist", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: encodedToken,
-      },
-      body: JSON.stringify({ product }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data.message) {
-          wishlistArray.map((wishlistItem) => {
-            if (wishlistItem._id === product._id) {
-              wishlistFlag = true;
-              return true;
-            }
-            return true;
-          });
-          if (wishlistFlag === false) {
+    wishlistArray.map((wishlistItem) => {
+      if (wishlistItem._id === product._id) {
+        wishlistFlag = true;
+        return true;
+      }
+      return true;
+    });
+    if (wishlistFlag === false) {
+      fetch("/api/user/wishlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: encodedToken,
+        },
+        body: JSON.stringify({ product }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (!data.message) {
             toggleToast("Added To Wishlist ✔", "green", "whitesmoke");
             setWishlistArray([...wishlistArray, product]);
+          } else {
+            navigate("/login");
           }
-        } else {
-          navigate("/login");
-        }
-      });
+        })
+        .catch((err) => console.log(err));
+    } else {
+      toggleToast("Already in Wishlist ✔", "green", "whitesmoke");
+    }
   };
 
   useEffect(() => {

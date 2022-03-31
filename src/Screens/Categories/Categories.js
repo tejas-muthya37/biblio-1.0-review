@@ -17,7 +17,8 @@ function Categories() {
       .then((res) => res.json())
       .then((data) =>
         dispatch({ type: "Categories setup", payload: data.categories })
-      );
+      )
+      .catch((err) => console.log(err));
   }, []);
 
   return (

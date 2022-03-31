@@ -30,6 +30,26 @@ function Wishlist() {
     cartArray.map((cartItem, index) => {
       if (cartItem._id === product._id) {
         productFlag = true;
+        fetch(`/api/user/wishlist/${product._id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            authorization: encodedToken,
+          },
+        })
+          .then(() => {
+            fetch(`/api/user/cart/${product._id}`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                authorization: encodedToken,
+              },
+              body: JSON.stringify({ action: { type: "increment" } }),
+            });
+          })
+          .catch((err) => console.log(err));
         setCartArray([
           ...cartArray.slice(0, index),
           { ...cartArray[index], bookQuantity: cartItem.bookQuantity + 1 },
@@ -38,29 +58,32 @@ function Wishlist() {
       }
       return true;
     });
-    if (productFlag === false) setCartArray([...cartArray, product]);
+    if (productFlag === false) {
+      setCartArray([...cartArray, product]);
+      fetch(`/api/user/wishlist/${product._id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          authorization: encodedToken,
+        },
+      })
+        .then(() => {
+          fetch("/api/user/cart", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: encodedToken,
+            },
+            body: JSON.stringify({ product }),
+          });
+        })
+        .catch((err) => console.log(err));
+    }
     toggleToast("Moved To Cart ✔", "green", "whitesmoke");
     setWishlistArray(
       wishlistArray.filter((wishlistItem) => wishlistItem._id !== product._id)
     );
-
-    fetch(`/api/user/wishlist/${product._id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        authorization: encodedToken,
-      },
-    }).then(() => {
-      fetch("/api/user/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: encodedToken,
-        },
-        body: JSON.stringify({ product }),
-      });
-    });
   };
 
   const removeFromWishlist = (id) => {
