@@ -198,8 +198,7 @@ function Checkout() {
 
   useEffect(() => {
     localStorage.setItem("SAVED_ADDRESSES", JSON.stringify(savedAddresses));
-    console.log(selectedAddress);
-  });
+  }, [savedAddresses]);
 
   return (
     <div className="Checkout">
