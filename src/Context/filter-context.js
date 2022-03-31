@@ -126,7 +126,6 @@ const reducer = (state, action) => {
         };
       }
     case "Clear filter":
-      state.items.map((item) => (item.show = true));
       return {
         ...state,
         filters: {

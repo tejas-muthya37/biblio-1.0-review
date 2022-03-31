@@ -86,7 +86,6 @@ function Products(props) {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (!data.message) {
               toggleToast("Added To Cart ✔", "green", "whitesmoke");
               setCartArray([
@@ -147,7 +146,6 @@ function Products(props) {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (!data.message) {
             toggleToast("Added To Wishlist ✔", "green", "whitesmoke");
             setWishlistArray([...wishlistArray, product]);
