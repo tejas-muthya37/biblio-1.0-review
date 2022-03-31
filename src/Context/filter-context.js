@@ -25,85 +25,116 @@ const reducer = (state, action) => {
         ...state,
         items: [...state.items].sort((a, b) => b.bookPrice - a.bookPrice),
       };
-    case "Price filter":
-      state.items.map((item) => {
-        item.bookPrice > action.payload
-          ? (item.show = false)
-          : (item.show = true);
-
-        return true;
-      });
-      return {
-        ...state,
-        items: state.items,
-      };
-    case "Rating filter":
-      state.items.map((item) => {
-        item.bookRating < action.payload
-          ? (item.show = false)
-          : (item.show = true);
-        return true;
-      });
-      return {
-        ...state,
-        items: state.items,
-      };
-    case "Category filter":
-      if (state.categoryFiltersFlag === false) {
-        state.items.map((item) => {
-          item.categoryName === action.payload.id
-            ? (item.show = true)
-            : (item.show = false);
-          return true;
-        });
-        return {
-          ...state,
-          items: state.items,
-          categoryFiltersFlag: true,
-          checkedCount: state.checkedCount + 1,
-        };
-      } else {
+    case "Manage filters":
+      if (action.payload.type === "checkbox") {
         if (action.payload.checked) {
-          state.items.map((item) => {
-            if (item.categoryName === action.payload.id) {
-              item.show = true;
-            }
-            return true;
-          });
           return {
             ...state,
-            items: state.items,
-            categoryFiltersFlag: true,
-            checkedCount: state.checkedCount + 1,
+            filters: {
+              ...state.filters,
+              category: [...state.filters.category, action.payload.id],
+            },
           };
         } else {
-          if (state.checkedCount === 1) {
-            state.items.map((item) => (item.show = true));
-            return {
-              ...state,
-              items: state.items,
-              categoryFiltersFlag: false,
-              checkedCount: state.checkedCount - 1,
-            };
-          } else {
-            state.items.map((item) => {
-              if (item.categoryName === action.payload.id) item.show = false;
-              return true;
-            });
-            return {
-              ...state,
-              items: state.items,
-              categoryFiltersFlag: true,
-              checkedCount: state.checkedCount - 1,
-            };
-          }
+          return {
+            filters: {
+              ...state.filters,
+              category: state.filters.category.filter(
+                (item) => item !== action.payload.id
+              ),
+            },
+          };
         }
+      } else if (action.payload.type === "radio") {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            rating: Number(action.payload.value),
+          },
+        };
+      } else if (action.payload.type === "range") {
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            price: Number(action.payload.value),
+          },
+        };
+      }
+    case "Price filter":
+      if (state.filters.category.length > 0) {
+        return {
+          ...state,
+          items: state.items.filter(
+            (item) =>
+              item.bookPrice < state.filters.price &&
+              item.bookRating >= state.filters.rating &&
+              state.filters.category.includes(item.categoryName)
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          items: state.items.filter(
+            (item) =>
+              item.bookPrice < state.filters.price &&
+              item.bookRating >= state.filters.rating
+          ),
+        };
+      }
+    case "Rating filter":
+      if (state.filters.category.length > 0) {
+        return {
+          ...state,
+          items: state.items.filter(
+            (item) =>
+              item.bookPrice < state.filters.price &&
+              item.bookRating >= state.filters.rating &&
+              state.filters.category.includes(item.categoryName)
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          items: state.items.filter(
+            (item) =>
+              item.bookPrice < state.filters.price &&
+              item.bookRating >= state.filters.rating
+          ),
+        };
+      }
+    case "Category filter":
+      if (state.filters.category.length > 0) {
+        return {
+          ...state,
+          items: state.items.filter(
+            (item) =>
+              item.bookPrice < state.filters.price &&
+              item.bookRating >= state.filters.rating &&
+              state.filters.category.includes(item.categoryName)
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          items: state.items.filter(
+            (item) =>
+              item.bookPrice < state.filters.price &&
+              item.bookRating >= state.filters.rating
+          ),
+        };
       }
     case "Clear filter":
       state.items.map((item) => (item.show = true));
       return {
         ...state,
-        items: action.payload,
+        filters: {
+          category: [],
+          rating: 2,
+          price: 450,
+        },
+        items: state.items,
         categoryFiltersFlag: false,
         checkedCount: 0,
       };
@@ -117,7 +148,11 @@ const FilterProvider = ({ children }) => {
     categories: [],
     items: [],
     categoryFiltersFlag: false,
-    checkedCount: 0,
+    filters: {
+      category: [],
+      rating: 2,
+      price: 450,
+    },
   });
   return (
     <FilterContext.Provider value={{ state, dispatch }}>

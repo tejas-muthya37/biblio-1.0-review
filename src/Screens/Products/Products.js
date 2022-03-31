@@ -29,6 +29,14 @@ function Products(props) {
   let { categoryName } = useParams();
   const inputRef = useRef(null);
 
+  const { state, dispatch } = useFilter();
+
+  const applyFilters = (passedType, passedPayload) => {
+    dispatch({ type: "Manage filters", payload: passedPayload });
+    dispatch({ type: "Setup", payload: unsortedArray });
+    dispatch({ type: passedType });
+  };
+
   const clearFilters = () => {
     dispatch({ type: "Clear filter", payload: unsortedArray });
     setPrice("450");
@@ -44,8 +52,6 @@ function Products(props) {
       highToLowRadio: false,
     });
   };
-
-  const { state, dispatch } = useFilter();
 
   useEffect(() => {
     fetch("/api/products", { method: "GET" })
@@ -179,7 +185,7 @@ function Products(props) {
               ref={inputRef}
               onChange={(event) => {
                 setPrice(event.target.value);
-                dispatch({ type: "Price filter", payload: event.target.value });
+                applyFilters("Price filter", event.target);
               }}
               value={price}
               type="range"
@@ -206,10 +212,7 @@ function Products(props) {
                       ...formInputs,
                       thrillerCheckbox: !formInputs.thrillerCheckbox,
                     });
-                    dispatch({
-                      type: "Category filter",
-                      payload: event.target,
-                    });
+                    applyFilters("Category filter", event.target);
                   }}
                   checked={formInputs.thrillerCheckbox}
                 />
@@ -226,10 +229,7 @@ function Products(props) {
                       ...formInputs,
                       dramaCheckbox: !formInputs.dramaCheckbox,
                     });
-                    dispatch({
-                      type: "Category filter",
-                      payload: event.target,
-                    });
+                    applyFilters("Category filter", event.target);
                   }}
                   checked={formInputs.dramaCheckbox}
                 />{" "}
@@ -246,10 +246,7 @@ function Products(props) {
                       ...formInputs,
                       scifiCheckbox: !formInputs.scifiCheckbox,
                     });
-                    dispatch({
-                      type: "Category filter",
-                      payload: event.target,
-                    });
+                    applyFilters("Category filter", event.target);
                   }}
                   checked={formInputs.scifiCheckbox}
                 />{" "}
@@ -266,10 +263,7 @@ function Products(props) {
                       ...formInputs,
                       romanceCheckbox: !formInputs.romanceCheckbox,
                     });
-                    dispatch({
-                      type: "Category filter",
-                      payload: event.target,
-                    });
+                    applyFilters("Category filter", event.target);
                   }}
                   checked={formInputs.romanceCheckbox}
                 />{" "}
@@ -293,10 +287,7 @@ function Products(props) {
                     rating3Checkbox: false,
                     rating2Checkbox: false,
                   });
-                  dispatch({
-                    type: "Rating filter",
-                    payload: event.target.value,
-                  });
+                  applyFilters("Rating filter", event.target);
                 }}
                 checked={formInputs.rating4Checkbox}
               />{" "}
@@ -319,10 +310,7 @@ function Products(props) {
                     rating3Checkbox: true,
                     rating2Checkbox: false,
                   });
-                  dispatch({
-                    type: "Rating filter",
-                    payload: event.target.value,
-                  });
+                  applyFilters("Rating filter", event.target);
                 }}
                 checked={formInputs.rating3Checkbox}
               />{" "}
@@ -345,10 +333,7 @@ function Products(props) {
                     rating3Checkbox: false,
                     rating2Checkbox: true,
                   });
-                  dispatch({
-                    type: "Rating filter",
-                    payload: event.target.value,
-                  });
+                  applyFilters("Rating filter", event.target);
                 }}
                 checked={formInputs.rating2Checkbox}
               />{" "}
@@ -372,7 +357,7 @@ function Products(props) {
                     lowToHighRadio: true,
                     highToLowRadio: false,
                   });
-                  dispatch({ type: "Low to High" });
+                  applyFilters("Low to High");
                 }}
                 checked={formInputs.lowToHighRadio}
               />
@@ -390,7 +375,7 @@ function Products(props) {
                     lowToHighRadio: false,
                     highToLowRadio: true,
                   });
-                  dispatch({ type: "High to Low" });
+                  applyFilters("High to Low");
                 }}
                 checked={formInputs.highToLowRadio}
               />
