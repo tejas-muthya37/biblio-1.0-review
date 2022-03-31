@@ -148,6 +148,7 @@ const FilterProvider = ({ children }) => {
     categories: [],
     items: [],
     categoryFiltersFlag: false,
+    // Default filter criteria
     filters: {
       category: [],
       rating: 2,
