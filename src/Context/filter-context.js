@@ -1,3 +1,4 @@
+import { StarTwoTone } from "@mui/icons-material";
 import { createContext, useContext, useReducer } from "react";
 
 const FilterContext = createContext();
@@ -60,8 +61,16 @@ const reducer = (state, action) => {
             price: Number(action.payload.value),
           },
         };
+      } else {
+        return {
+          ...state,
+          filters: {
+            category: [],
+            rating: 2,
+            price: 450,
+          },
+        };
       }
-      return state;
     case "Price filter":
       if (state.filters.category.length > 0) {
         return {
@@ -128,14 +137,8 @@ const reducer = (state, action) => {
     case "Clear filter":
       return {
         ...state,
-        filters: {
-          category: [],
-          rating: 2,
-          price: 450,
-        },
-        items: state.items,
+        items: action.payload,
         categoryFiltersFlag: false,
-        checkedCount: 0,
       };
     default:
       return state;

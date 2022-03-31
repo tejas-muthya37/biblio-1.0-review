@@ -38,6 +38,7 @@ function Products(props) {
   };
 
   const clearFilters = () => {
+    dispatch({ type: "Manage filters", payload: "" });
     dispatch({ type: "Clear filter", payload: unsortedArray });
     setPrice("450");
     setFormInputs({
@@ -390,20 +391,18 @@ function Products(props) {
           {props.productPage &&
             state.items.map((product) => {
               return (
-                product.show && (
-                  <Card
-                    key={product._id}
-                    bookCover={product.bookCover}
-                    bookTitle={product.bookTitle}
-                    bookAuthor={product.bookAuthor}
-                    bookPrice={product.bookPrice}
-                    actionOne={product.actionOne}
-                    actionTwo={product.actionTwo}
-                    actionOneFunction={() => addToCart(product)}
-                    actionTwoFunction={() => addToWishlist(product)}
-                    bookQuantity={1}
-                  />
-                )
+                <Card
+                  key={product._id}
+                  bookCover={product.bookCover}
+                  bookTitle={product.bookTitle}
+                  bookAuthor={product.bookAuthor}
+                  bookPrice={product.bookPrice}
+                  actionOne={product.actionOne}
+                  actionTwo={product.actionTwo}
+                  actionOneFunction={() => addToCart(product)}
+                  actionTwoFunction={() => addToWishlist(product)}
+                  bookQuantity={1}
+                />
               );
             })}
 
@@ -411,20 +410,18 @@ function Products(props) {
             .filter((item) => item.categoryName === categoryName)
             .map((product) => {
               return (
-                product.show && (
-                  <Card
-                    key={product._id}
-                    bookCover={product.bookCover}
-                    bookTitle={product.bookTitle}
-                    bookAuthor={product.bookAuthor}
-                    bookPrice={product.bookPrice}
-                    actionOne={product.actionOne}
-                    actionTwo={product.actionTwo}
-                    actionOneFunction={() => addToCart(product)}
-                    actionTwoFunction={() => addToWishlist(product)}
-                    bookQuantity={1}
-                  />
-                )
+                <Card
+                  key={product._id}
+                  bookCover={product.bookCover}
+                  bookTitle={product.bookTitle}
+                  bookAuthor={product.bookAuthor}
+                  bookPrice={product.bookPrice}
+                  actionOne={product.actionOne}
+                  actionTwo={product.actionTwo}
+                  actionOneFunction={() => addToCart(product)}
+                  actionTwoFunction={() => addToWishlist(product)}
+                  bookQuantity={1}
+                />
               );
             })}
         </div>{" "}
