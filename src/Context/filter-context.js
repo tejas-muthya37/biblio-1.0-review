@@ -62,6 +62,7 @@ const reducer = (state, action) => {
           },
         };
       }
+      return state;
     case "Price filter":
       if (state.filters.category.length > 0) {
         return {
