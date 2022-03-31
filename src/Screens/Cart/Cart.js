@@ -38,9 +38,7 @@ function Cart() {
         Accept: "application/json",
         authorization: encodedToken,
       },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    });
   };
 
   const moveToWishlist = (product) => {
@@ -65,21 +63,16 @@ function Cart() {
         Accept: "application/json",
         authorization: encodedToken,
       },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .then(() => {
-        fetch("/api/user/wishlist", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: encodedToken,
-          },
-          body: JSON.stringify({ product }),
-        })
-          .then((res) => res.json())
-          .then((data) => console.log(data));
+    }).then(() => {
+      fetch("/api/user/wishlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: encodedToken,
+        },
+        body: JSON.stringify({ product }),
       });
+    });
   };
 
   const incrementCartItemQuantity = (id) => {
@@ -101,9 +94,7 @@ function Cart() {
         authorization: encodedToken,
       },
       body: JSON.stringify({ action: { type: "increment" } }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    });
   };
 
   const decrementCartItemQuantity = (id) => {
@@ -129,9 +120,7 @@ function Cart() {
         authorization: encodedToken,
       },
       body: JSON.stringify({ action: { type: "decrement" } }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    });
   };
 
   const cartTotal = cartArray.reduce((accumulator, currentValue) => {

@@ -84,7 +84,6 @@ function Products(props) {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (!data.message) {
               toggleToast("Added To Cart ✔", "green", "whitesmoke");
               productFlag = true;
@@ -114,7 +113,6 @@ function Products(props) {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (!data.message) {
             setCartArray([...cartArray, product]);
             toggleToast("Added To Cart ✔", "green", "whitesmoke");
@@ -137,7 +135,6 @@ function Products(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (!data.message) {
           wishlistArray.map((wishlistItem) => {
             if (wishlistItem._id === product._id) {

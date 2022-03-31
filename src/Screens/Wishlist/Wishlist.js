@@ -51,21 +51,16 @@ function Wishlist() {
         Accept: "application/json",
         authorization: encodedToken,
       },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .then(() => {
-        fetch("/api/user/cart", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: encodedToken,
-          },
-          body: JSON.stringify({ product }),
-        })
-          .then((res) => res.json())
-          .then((data) => console.log(data));
+    }).then(() => {
+      fetch("/api/user/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: encodedToken,
+        },
+        body: JSON.stringify({ product }),
       });
+    });
   };
 
   const removeFromWishlist = (id) => {
@@ -81,9 +76,7 @@ function Wishlist() {
         Accept: "application/json",
         authorization: encodedToken,
       },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    });
   };
 
   useEffect(() => {

@@ -5,7 +5,6 @@ const FilterContext = createContext();
 const reducer = (state, action) => {
   switch (action.type) {
     case "Setup":
-      console.log(action.payload);
       return {
         ...state,
         items: action.payload,
