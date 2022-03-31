@@ -16,6 +16,17 @@ function Cart() {
   const { cartArray, setCartArray, wishlistArray, setWishlistArray } =
     useProducts();
 
+  useEffect(() => {
+    fetch("/api/user/cart", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        authorization: encodedToken,
+      },
+    });
+  }, []);
+
   const removeFromCart = (id) => {
     setCartArray(cartArray.filter((cartItem) => cartItem._id !== id));
     toggleToast("Removed From Cart ✔", "red", "whitesmoke");

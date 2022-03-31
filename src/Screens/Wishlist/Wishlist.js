@@ -14,6 +14,17 @@ function Wishlist() {
   const { cartArray, setCartArray, wishlistArray, setWishlistArray } =
     useProducts();
 
+  useEffect(() => {
+    fetch("/api/user/wishlist", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        authorization: encodedToken,
+      },
+    });
+  }, []);
+
   const moveToCart = (product) => {
     var productFlag = false;
     cartArray.map((cartItem, index) => {
