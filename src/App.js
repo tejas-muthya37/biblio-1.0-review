@@ -6,8 +6,10 @@ import Products from "./Screens/Products/Products";
 import Categories from "./Screens/Categories/Categories";
 import Checkout from "./Screens/Checkout/Checkout";
 import Success from "./Screens/Success/Success";
+import Empty from "./Components/Empty/Empty";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Mockman from "mockman-js";
+import { notFound } from "./images.js";
 
 function App() {
   return (
@@ -51,6 +53,11 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
 
           <Route path="/success" element={<Success />} />
+
+          <Route
+            path="*"
+            element={<Empty pageNotFound={true} emptyImage={notFound} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

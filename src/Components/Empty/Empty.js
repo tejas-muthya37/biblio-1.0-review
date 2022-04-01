@@ -4,7 +4,9 @@ function Empty(props) {
   return (
     <div className="Empty">
       <img src={props.emptyImage} alt="empty" />
-      <h3>Your {props.emptyTitle} seems to be empty!</h3>
+      {props.pageNotFound === false && (
+        <h3>Your {props.emptyTitle} seems to be empty!</h3>
+      )}
     </div>
   );
 }

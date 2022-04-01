@@ -26,6 +26,7 @@ import category1 from "./Media/category-1.jpg";
 import category2 from "./Media/category-2.jpg";
 import category3 from "./Media/category-3.jpg";
 import category4 from "./Media/category-4.jpg";
+import notFound from "./Media/404-page-not-found.png";
 
 export {
   thrillerBookOne,
@@ -56,4 +57,5 @@ export {
   category2,
   category3,
   category4,
+  notFound,
 };
