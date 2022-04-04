@@ -33,5 +33,5 @@ v1.1 includes the following features as of now :-
 # How to contribute to Biblio? 📚
 Biblio is a public repository and we monitor our pull requests continously. You can raise a pull request for any contributions and the team will look into it and merge or suggest changes accordingly.
 
-How to report issues? 📚
+# How to report issues? 📚
 For now, we are using Issues on GitHub to track issues - https://github.com/tejas-muthya37/biblio-1.0-review/issues
