@@ -1,6 +1,12 @@
 import "./card.css";
+import { useNavbar } from "./../../Context/navbar-context";
+import { useNavigate } from "react-router-dom";
 
 function Card(props) {
+  let navigate = useNavigate();
+
+  const { isAuthenticated } = useNavbar();
+
   return (
     <div className="Card">
       <div className="card-e-commerce">
@@ -38,13 +44,21 @@ function Card(props) {
           </div>
           <div className="button-group">
             <button
-              onClick={props.actionOneFunction}
+              onClick={() => {
+                isAuthenticated
+                  ? props.actionOneFunction()
+                  : navigate("/login");
+              }}
               className="btn-action-one"
             >
               {props.actionOne}
             </button>
             <button
-              onClick={props.actionTwoFunction}
+              onClick={() => {
+                isAuthenticated
+                  ? props.actionTwoFunction()
+                  : navigate("/login");
+              }}
               className="btn-action-two"
             >
               {props.actionTwo}

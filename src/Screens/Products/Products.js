@@ -62,7 +62,7 @@ function Products(props) {
         setUnsortedArray(json.products);
       })
       .catch((err) => console.log(err));
-  }, [dispatch]);
+  }, []);
 
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
 
@@ -76,6 +76,15 @@ function Products(props) {
     cartArray.map((cartItem, index) => {
       if (cartItem._id === product._id) {
         productFlag = true;
+        toggleToast("Added To Cart ✔", "green", "whitesmoke");
+        setCartArray([
+          ...cartArray.slice(0, index),
+          {
+            ...cartArray[index],
+            bookQuantity: cartItem.bookQuantity + 1,
+          },
+          ...cartArray.slice(index + 1),
+        ]);
         fetch(`/api/user/cart/${product._id}`, {
           method: "POST",
           headers: {
@@ -84,28 +93,13 @@ function Products(props) {
             authorization: encodedToken,
           },
           body: JSON.stringify({ action: { type: "increment" } }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (!data.message) {
-              toggleToast("Added To Cart ✔", "green", "whitesmoke");
-              setCartArray([
-                ...cartArray.slice(0, index),
-                {
-                  ...cartArray[index],
-                  bookQuantity: cartItem.bookQuantity + 1,
-                },
-                ...cartArray.slice(index + 1),
-              ]);
-            } else {
-              navigate("/login");
-            }
-          })
-          .catch((err) => console.log(err));
+        });
       }
       return true;
     });
     if (productFlag === false) {
+      setCartArray([...cartArray, product]);
+      toggleToast("Added To Cart ✔", "green", "whitesmoke");
       fetch("/api/user/cart", {
         method: "POST",
         headers: {
@@ -113,17 +107,7 @@ function Products(props) {
           authorization: encodedToken,
         },
         body: JSON.stringify({ product }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (!data.message) {
-            setCartArray([...cartArray, product]);
-            toggleToast("Added To Cart ✔", "green", "whitesmoke");
-          } else {
-            navigate("/login");
-          }
-        })
-        .catch((err) => console.log(err));
+      });
     }
   };
 
@@ -137,6 +121,8 @@ function Products(props) {
       return true;
     });
     if (wishlistFlag === false) {
+      toggleToast("Added To Wishlist ✔", "green", "whitesmoke");
+      setWishlistArray([...wishlistArray, product]);
       fetch("/api/user/wishlist", {
         method: "POST",
         headers: {
@@ -144,17 +130,7 @@ function Products(props) {
           authorization: encodedToken,
         },
         body: JSON.stringify({ product }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (!data.message) {
-            toggleToast("Added To Wishlist ✔", "green", "whitesmoke");
-            setWishlistArray([...wishlistArray, product]);
-          } else {
-            navigate("/login");
-          }
-        })
-        .catch((err) => console.log(err));
+      });
     } else {
       toggleToast("Already in Wishlist ✔", "green", "whitesmoke");
     }

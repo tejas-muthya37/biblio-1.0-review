@@ -30,6 +30,17 @@ function Wishlist() {
     cartArray.map((cartItem, index) => {
       if (cartItem._id === product._id) {
         productFlag = true;
+        setCartArray([
+          ...cartArray.slice(0, index),
+          { ...cartArray[index], bookQuantity: cartItem.bookQuantity + 1 },
+          ...cartArray.slice(index + 1),
+        ]);
+        setWishlistArray(
+          wishlistArray.filter(
+            (wishlistItem) => wishlistItem._id !== product._id
+          )
+        );
+        toggleToast("Moved To Cart ✔", "green", "whitesmoke");
         fetch(`/api/user/wishlist/${product._id}`, {
           method: "DELETE",
           headers: {
@@ -50,16 +61,15 @@ function Wishlist() {
             });
           })
           .catch((err) => console.log(err));
-        setCartArray([
-          ...cartArray.slice(0, index),
-          { ...cartArray[index], bookQuantity: cartItem.bookQuantity + 1 },
-          ...cartArray.slice(index + 1),
-        ]);
       }
       return true;
     });
     if (productFlag === false) {
+      toggleToast("Moved To Cart ✔", "green", "whitesmoke");
       setCartArray([...cartArray, product]);
+      setWishlistArray(
+        wishlistArray.filter((wishlistItem) => wishlistItem._id !== product._id)
+      );
       fetch(`/api/user/wishlist/${product._id}`, {
         method: "DELETE",
         headers: {
@@ -80,10 +90,6 @@ function Wishlist() {
         })
         .catch((err) => console.log(err));
     }
-    toggleToast("Moved To Cart ✔", "green", "whitesmoke");
-    setWishlistArray(
-      wishlistArray.filter((wishlistItem) => wishlistItem._id !== product._id)
-    );
   };
 
   const removeFromWishlist = (id) => {

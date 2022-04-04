@@ -46,11 +46,19 @@ function Cart() {
     wishlistArray.map((wishlistItem) => {
       if (wishlistItem._id === product._id) {
         wishlistFlag = true;
+        toggleToast("Moved To Wishlist ✔", "green", "whitesmoke");
+        setCartArray(
+          cartArray.filter((cartItem) => cartItem._id !== product._id)
+        );
         return true;
       }
       return true;
     });
     if (wishlistFlag === false) {
+      toggleToast("Moved To Wishlist ✔", "green", "whitesmoke");
+      setCartArray(
+        cartArray.filter((cartItem) => cartItem._id !== product._id)
+      );
       setWishlistArray([...wishlistArray, product]);
       fetch(`/api/user/cart/${product._id}`, {
         method: "DELETE",
@@ -72,8 +80,6 @@ function Cart() {
         })
         .catch((err) => console.log(err));
     }
-    toggleToast("Moved To Wishlist ✔", "green", "whitesmoke");
-    setCartArray(cartArray.filter((cartItem) => cartItem._id !== product._id));
   };
 
   const incrementCartItemQuantity = (id) => {
