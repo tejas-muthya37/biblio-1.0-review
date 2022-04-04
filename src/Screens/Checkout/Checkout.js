@@ -277,7 +277,7 @@ function Checkout() {
               <input
                 type="hidden"
                 name="_next"
-                value="https://biblio-books.netlify.app/success"
+                value="https://biblio-books-v1.netlify.app/success"
               />
               <input
                 type="hidden"
