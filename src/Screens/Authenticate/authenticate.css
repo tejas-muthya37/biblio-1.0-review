@@ -47,6 +47,9 @@
 .landing-inputs label {
     margin-bottom: 5px;
     color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .landing-inputs .label-with-input input {

@@ -1,11 +1,14 @@
 import "./authenticate.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Navbar from "./../../Components/Navbar/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { useNavbar } from "./../../Context/navbar-context";
 import { useToast } from "./../../Context/toast-context";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function Authenticate(props) {
+  const [showPassword, setShowPassword] = useState(false);
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
   const { setNavbarButtonText } = useNavbar();
   const emailPattern = /\S+@\S+\.\S+/;
@@ -101,9 +104,20 @@ function Authenticate(props) {
           </div>
           <div className="label-with-input">
             <label id="password-label" htmlFor="password">
-              Password *
+              <span>Password *</span>
+              <span onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? (
+                  <VisibilityIcon fontSize="small" />
+                ) : (
+                  <VisibilityOffIcon fontSize="small" />
+                )}
+              </span>
             </label>
-            <input ref={passwordRef} type="password" id="password" />
+            <input
+              ref={passwordRef}
+              type={showPassword ? "text" : "password"}
+              id="password"
+            />
           </div>
         </div>
 
