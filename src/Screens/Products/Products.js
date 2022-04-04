@@ -6,7 +6,6 @@ import { useToast } from "./../../Context/toast-context";
 import { useFilter } from "./../../Context/filter-context";
 import Navbar from "./../../Components/Navbar/Navbar";
 import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
 
 function Products(props) {
   const [price, setPrice] = useState("450");
@@ -25,7 +24,6 @@ function Products(props) {
 
   const [unsortedArray, setUnsortedArray] = useState([]);
 
-  let navigate = useNavigate();
   let { categoryName } = useParams();
   const inputRef = useRef(null);
 

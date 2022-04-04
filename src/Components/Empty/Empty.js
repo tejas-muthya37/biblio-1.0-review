@@ -4,7 +4,7 @@ function Empty(props) {
   return (
     <div className="Empty">
       <img src={props.emptyImage} alt="empty" />
-      {props.pageNotFound === false && (
+      {props.pageNotFound !== true && (
         <h3>Your {props.emptyTitle} seems to be empty!</h3>
       )}
     </div>
