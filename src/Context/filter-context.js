@@ -1,4 +1,3 @@
-import { StarTwoTone } from "@mui/icons-material";
 import { createContext, useContext, useReducer } from "react";
 
 const FilterContext = createContext();
@@ -16,15 +15,63 @@ const reducer = (state, action) => {
         categories: action.payload,
       };
     case "Low to High":
-      return {
-        ...state,
-        items: [...state.items].sort((a, b) => a.bookPrice - b.bookPrice),
-      };
+      // return {
+      //   ...state,
+      //   items: [...state.items].sort((a, b) => a.bookPrice - b.bookPrice),
+      // };
+      if (state.filters.category.length > 0) {
+        return {
+          ...state,
+          items: state.items
+            .filter(
+              (item) =>
+                item.bookPrice < state.filters.price &&
+                item.bookRating >= state.filters.rating &&
+                state.filters.category.includes(item.categoryName)
+            )
+            .sort((a, b) => a.bookPrice - b.bookPrice),
+        };
+      } else {
+        return {
+          ...state,
+          items: state.items
+            .filter(
+              (item) =>
+                item.bookPrice < state.filters.price &&
+                item.bookRating >= state.filters.rating
+            )
+            .sort((a, b) => a.bookPrice - b.bookPrice),
+        };
+      }
     case "High to Low":
-      return {
-        ...state,
-        items: [...state.items].sort((a, b) => b.bookPrice - a.bookPrice),
-      };
+      // return {
+      //   ...state,
+      //   items: [...state.items].sort((a, b) => b.bookPrice - a.bookPrice),
+      // };
+      if (state.filters.category.length > 0) {
+        return {
+          ...state,
+          items: state.items
+            .filter(
+              (item) =>
+                item.bookPrice < state.filters.price &&
+                item.bookRating >= state.filters.rating &&
+                state.filters.category.includes(item.categoryName)
+            )
+            .sort((a, b) => b.bookPrice - a.bookPrice),
+        };
+      } else {
+        return {
+          ...state,
+          items: state.items
+            .filter(
+              (item) =>
+                item.bookPrice < state.filters.price &&
+                item.bookRating >= state.filters.rating
+            )
+            .sort((a, b) => b.bookPrice - a.bookPrice),
+        };
+      }
     case "Manage filters":
       if (action.payload.type === "checkbox") {
         if (action.payload.checked) {
@@ -46,13 +93,17 @@ const reducer = (state, action) => {
           };
         }
       } else if (action.payload.type === "radio") {
-        return {
-          ...state,
-          filters: {
-            ...state.filters,
-            rating: Number(action.payload.value),
-          },
-        };
+        if (action.payload.name !== "sort-input") {
+          return {
+            ...state,
+            filters: {
+              ...state.filters,
+              rating: Number(action.payload.value),
+            },
+          };
+        } else {
+          return state;
+        }
       } else if (action.payload.type === "range") {
         return {
           ...state,

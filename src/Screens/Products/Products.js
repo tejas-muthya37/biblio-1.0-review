@@ -62,7 +62,7 @@ function Products(props) {
         setUnsortedArray(json.products);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [dispatch]);
 
   const { toggleToast, toastVisibility, toastColor, toastText } = useToast();
 
@@ -355,13 +355,13 @@ function Products(props) {
                 type="radio"
                 id="radio-5"
                 name="sort-input"
-                onClick={() => {
+                onClick={(event) => {
                   setFormInputs({
                     ...formInputs,
                     lowToHighRadio: true,
                     highToLowRadio: false,
                   });
-                  applyFilters("Low to High");
+                  applyFilters("Low to High", event.target);
                 }}
                 checked={formInputs.lowToHighRadio}
               />
@@ -373,13 +373,13 @@ function Products(props) {
                 type="radio"
                 id="radio-6"
                 name="sort-input"
-                onClick={() => {
+                onClick={(event) => {
                   setFormInputs({
                     ...formInputs,
                     lowToHighRadio: false,
                     highToLowRadio: true,
                   });
-                  applyFilters("High to Low");
+                  applyFilters("High to Low", event.target);
                 }}
                 checked={formInputs.highToLowRadio}
               />
