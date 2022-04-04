@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# Biblio 📚
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Biblio is an E-Commerce App dedicated to delivering books to Bibliophiles.
 
-## Available Scripts
+v1.1 includes the following features as of now :- 
 
-In the project directory, you can run:
+⚡ Browse for books that belong to your preferred Category.
 
-### `npm start`
+⚡ Sort through the inventory by Price, Reviews and Category.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+⚡ Add your favourite books to the Cart to buy them right away.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+⚡ Add your favourite books to the Wishlist if you want to come back to it later.
 
-### `npm test`
+⚡ Move your books from the Wishlist to the Cart whenever you are ready and vice-versa.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+⚡ View the Shipping Cost, Cart Total and the Grand Total before you place your order.
 
-### `npm run build`
+⚡ Add a new address or select one of your saved addresses.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+⚡ Place your order and sit back as we deliver your next read!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# How to run Biblio on your local machine? 📚
 
-### `npm run eject`
+1. Go to https://github.com/tejas-muthya37/biblio-1.0-review
+2. Fork the Biblio repository onto your Github repository.
+3. Copy the SSH link.
+4. Open the CMD and navigate to the folder in which you want to run Biblio.
+5. Run the command git clone 'Enter the SSH copied from forked repository'.
+6. The source code of Biblio should now be present on your local machine.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# How to contribute to Biblio? 📚
+Biblio is a public repository and we monitor our pull requests continously. You can raise a pull request for any contributions and the team will look into it and merge or suggest changes accordingly.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+How to report issues? 📚
+For now, we are using Issues on GitHub to track issues - https://github.com/tejas-muthya37/biblio-1.0-review/issues
