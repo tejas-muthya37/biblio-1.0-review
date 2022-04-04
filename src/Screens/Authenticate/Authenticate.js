@@ -105,7 +105,10 @@ function Authenticate(props) {
           <div className="label-with-input">
             <label id="password-label" htmlFor="password">
               <span>Password *</span>
-              <span onClick={() => setShowPassword(!showPassword)}>
+              <span
+                className="password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              >
                 {showPassword ? (
                   <VisibilityIcon fontSize="small" />
                 ) : (
