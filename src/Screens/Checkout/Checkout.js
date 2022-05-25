@@ -15,7 +15,14 @@ function Checkout() {
     localStorage.getItem("SAVED_ADDRESSES")
   );
 
-  if (storedSavedAddresses === null) storedSavedAddresses = [];
+  if (storedSavedAddresses === null)
+    storedSavedAddresses = [
+      {
+        addressId: uuid(),
+        addressContent:
+          "Test User, 9988776655, testuser@gmail.com, 555002, #07 1st Cross 5th Main Test Area, Bengaluru, Karnataka",
+      },
+    ];
 
   const cartTotal = cartArray.reduce((accumulator, currentValue) => {
     accumulator += currentValue.bookPrice * currentValue.bookQuantity;
