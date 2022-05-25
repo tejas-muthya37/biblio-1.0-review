@@ -1,28 +1,39 @@
-.landing-page-container.categories {
-    margin-top: 11vh;
-    max-width: 100%;
-    padding: 0;
-    opacity: 1;
-    display: flex;
-    flex-direction: column;
+.home_image {
+    width: 100%;
+    height: 75vh;
+    object-fit: cover;
+    z-index: -1;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.hero-section {
+    display: grid;
     align-items: center;
 }
 
-.landing-page-container-title {
-    margin: 20vh auto 0 auto;
+.hero-section-cta {
     text-align: center;
-    letter-spacing: 5px;
-    word-spacing: 10px;
-    font-size: 1.75rem;
-    width: max-content;
+    margin-top: 10rem;
 }
 
+.hero-section-cta h3 {
+    background-color: whitesmoke;
+    color: var(--body-bg);
+    padding: 0.5rem;
+    border-radius: 2px;
+}
 
-.landing-page-container.categories button {
+.hero-section img,
+.hero-section-cta {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    justify-self: center;
+}
+
+.hero-section-cta button {
     height: 3rem;
     border: none;
     color: whitesmoke;
-    font-size: 1rem;
     border-radius: 2px;
     cursor: pointer;
     width: 10rem;
@@ -35,20 +46,26 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    margin-bottom: 4rem;
 }
 
 .landing-page-content.categories img {
-    width: 12rem;
-    height: 12rem;
-    padding: 5px;
-    border: 4px solid var(--body-bg);
+    width: 10rem;
+    height: 10rem;
+    padding: 3px;
+    border: 3px solid var(--body-bg);
     object-fit: cover;
 }
+
+.landing-page-content.categories img:hover {
+    transform: scale(1.015);
+    transition: transform 0.1s;
+}
+
 
 .landing-page-content.categories>* {
     text-decoration: none;
     color: var(--near-black);
-    
 }
 
 .category-card {
@@ -83,14 +100,11 @@
 }
 
 
+
 @media screen and (max-width: 928px) {
     .landing-page-content.categories img {
         width: 12.5rem;
         height: 12.5rem;
-    }
-
-    .landing-page-container.categories {
-        padding: 0 7.5rem;
     }
 }
 
@@ -100,38 +114,23 @@
         flex-direction: column;
         align-self: center;
     }
-
-    .landing-page-container.categories {
-        padding: 0 5rem;
-    }
 }
 
 @media screen and (max-width: 688px) {
-    .landing-page-container.categories {
-        padding: 0 3rem;
-    }
-
     .landing-page-content.categories img {
-        width: 10rem;
-        height: 10rem;
-    }
-}
-
-@media screen and (max-width: 548px) {
-    .landing-page-container-title {
-        font-size: 1.5rem;
-        letter-spacing: 2px;
-        text-align: center;
-        word-spacing: 4px;
+        width: 8rem;
+        height: 8rem;
     }
 
-    .landing-page-container.categories {
-        padding: 0;
+    .hero-section-cta h3 {
+        font-size: 1rem;
+        width: 80%;
+        margin: auto;
     }
-}
 
-@media screen and (max-width: 360px) {
-    .landing-page-container-title {
-        font-size: 1.3rem;
+    .hero-section-cta button {
+        height: 2.5rem;
+        width: 8rem;
+        font-size: 1.1rem;
     }
 }
